@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Books</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background: #fdf6e3;
+      color: #3e3e3e;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #8b5e3c;
+      color: white;
+      padding: 15px 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .app-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffdfba;
+    }
+
+    .profile-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    .container {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      border-bottom: 3px double #8b5e3c;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    .shop-button {
+      margin-top: 60px;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      background-color: #8b5e3c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .shop-button:hover {
+      background-color: #a66a48;
+    }
+
+    .books-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .book-card {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      width: 180px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .book-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="app-name">PustakEWare</div>
+    <div class="nav-links">
+      <a href="/editprofile">Edit Info</a>
+      <a href="/logout">Log Out</a>
+      <a href="/shop">Check out our Library?</a>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <% if (user && user.image) { %>
+          <img 
+            src="data:image/jpeg;base64,<%= user.image.toString('base64') %>" 
+            alt="<%= user.fullname %>" 
+            class="profile-img"
+          />
+        <% } else { %>
+          <img 
+            src="https://i.pinimg.com/736x/8b/6f/56/8b6f560c593b4062218ed2d06eb71b84.jpg" 
+            alt="Default Profile" 
+            class="profile-img"
+          />
+        <% } %>
+        <div style="margin-top: 5px; font-size: 0.9rem; font-weight: bold; color: white;">
+          <%= user.fullname %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Your Downloads</h1>
+    <div class="books-grid">
+      <% if(user && user.books && user.books.length > 0) { %>
+        <% user.books.forEach(book => { %>
+          <div class="book-card">
+            <h3><%= book.fullname %></h3>
+            <% if (book.image) { %>
+              <img
+                src="data:image/jpeg;base64,<%= book.image.toString('base64') %>"
+                alt="Book Cover"
+                class="book-image"
+              />
+              <a href="/removeBook/<%= book._id %>" class="shop-button">Remove Book</a>
+            <% } %>
+          </div> 
+        <% }) %>
+      <% } else { %>
+        <p>No books found.</p>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

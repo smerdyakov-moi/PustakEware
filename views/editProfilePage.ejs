@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Profile</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdf6e3;
+      color: #3e3e3e;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #8b5e3c;
+      color: white;
+      padding: 15px 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .app-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffdfba;
+    }
+
+    .profile-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 80px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 25px;
+      border-bottom: 2px dashed #8b5e3c;
+      padding-bottom: 10px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    input[type="submit"] {
+      background-color: #8b5e3c;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #a66a48;
+    }
+
+    .preview {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .preview img {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #8b5e3c;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="app-name">PustakEWare</div>
+    <div class="nav-links">
+      <a href="/userPage">Home</a>
+      <a href="/logout">Log Out</a>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <% if (user && user.image) { %>
+          <img 
+            src="data:image/jpeg;base64,<%= user.image.toString('base64') %>" 
+            alt="<%= user.fullname %>" 
+            class="profile-img"
+          />
+        <% } else { %>
+          <img 
+            src="https://i.pinimg.com/736x/8b/6f/56/8b6f560c593b4062218ed2d06eb71b84.jpg" 
+            alt="Default Profile" 
+            class="profile-img"
+          />
+        <% } %>
+        <div style="font-size: 0.8rem; margin-top: 4px;"><%= user.fullname %></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Profile Edit Form -->
+  <div class="container">
+    <h2>Edit Your Profile</h2>
+    <div style="text-align: center; margin-top: -10px; margin-bottom: 20px;">
+  <form action="/userPage/removeprofilepic" method="POST" style="display: inline;">
+    <button type="submit" style="background: none; border: none; color: #a66a48; text-decoration: underline; cursor: pointer; font-size: 0.9rem;">
+      Remove Profile Picture
+    </button>
+  </form>
+</div>
+    <form action="/userPage/updateprofile" method="POST" enctype="multipart/form-data">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" value="<%= user.fullname %>" required />
+
+      <label for="image">Change Profile Picture</label>
+      <div class="preview">
+        <% if (user.image) { %>
+          <img 
+            src="data:image/jpeg;base64,<%= user.image.toString('base64') %>" 
+            alt="Current Profile"
+          />
+        <% } else { %>
+          <img 
+            src="https://i.pinimg.com/736x/8b/6f/56/8b6f560c593b4062218ed2d06eb71b84.jpg" 
+            alt="Default"
+          />
+        <% } %>
+      </div>
+      <input type="file" id="image" name="image" accept="image/*" />
+
+      <input type="submit" value="Update Profile" />
+    </form>
+    
+  </div>
+  
+
+</body>
+</html>

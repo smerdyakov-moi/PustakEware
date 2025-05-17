@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pustak-E-Ware</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-color: #fdf6e3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1000px;
+      width: 100%;
+      background-color: #fffaf0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
+      border: 2px solid #8b5e3c;
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 40px;
+      min-width: 300px;
+      border-right: 1px solid #e0d8c3;
+    }
+
+    .form-section:last-child {
+      border-right: none;
+    }
+
+    .form-section h3,
+    .form-section h4 {
+      color: #3e3e3e;
+    }
+
+    .form-section h3 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .form-section h4 {
+      font-size: 22px;
+      margin-bottom: 25px;
+      color: #5a5a5a;
+    }
+
+    .form-section span {
+      color: #8b5e3c;
+      font-weight: bold;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="file"] {
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #c2b49b;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: #fffefc;
+    }
+
+    input[type="submit"] {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      background-color: #8b5e3c;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #a66a48;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #4a3c2f;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        box-shadow: none;
+        border: none;
+      }
+
+      .form-section {
+        border-right: none;
+        border-bottom: 1px solid #e0d8c3;
+      }
+
+      .form-section:last-child {
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Register -->
+    <div class="form-section" style="background-color: #fcf9f3;">
+      <h3>Welcome to <span>Pustak-E-Ware</span></h3>
+      <h4>Create your account</h4>
+      <form autocomplete="on" action="/register" method="post" enctype="multipart/form-data">
+        <input type="text" placeholder="Full Name" name="fullname" required />
+        <input type="email" placeholder="Email" name="email" required />
+        <input type="password" placeholder="Password" name="password" required />
+        <label for="image">Upload Profile Picture  (Set to Default if not)</label>
+        <input id="image" name="image" type="file"  />
+        <input type="submit" value="Create My Account" />
+      </form>
+    </div>
+
+    <!-- Login -->
+    <div class="form-section">
+      <h4>Login to your account</h4>
+      <form autocomplete="on" action="/login" method="post">
+        <input type="email" placeholder="Email" name="email" required />
+        <input type="password" placeholder="Password" name="password" required />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

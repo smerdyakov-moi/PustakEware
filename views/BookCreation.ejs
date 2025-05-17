@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Profile</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdf6e3;
+      color: #3e3e3e;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #8b5e3c;
+      color: white;
+      padding: 15px 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .app-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffdfba;
+    }
+
+    .profile-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 80px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 25px;
+      border-bottom: 2px dashed #8b5e3c;
+      padding-bottom: 10px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    input[type="submit"] {
+      background-color: #8b5e3c;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #a66a48;
+    }
+
+    .preview {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .preview img {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #8b5e3c;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <!-- Profile Edit Form -->
+  <div class="container">
+    <h2>Publish Books</h2>
+    <div style="text-align: center; margin-top: -10px; margin-bottom: 20px;">
+</div>
+    <form action="/createBook" method="POST" enctype="multipart/form-data">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" value="" required />
+
+      <label for="image">Publish cover</label>
+      <input type="file" id="image" name="image" accept="image/*" />
+
+      <label for ="pdf">Publish your pdf</label>
+      <input type="file" id="pdf" name="pdf" />  
+      <input type="submit" value="Update Profile" />
+    </form>
+    
+  </div>
+  
+
+</body>
+</html>
